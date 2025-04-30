@@ -1,5 +1,5 @@
 import React, {  useEffect, useState } from 'react'
-import { View, TextInput, Pressable, Text, StyleSheet } from 'react-native'
+import { View, TextInput, Pressable, Text, StyleSheet, Keyboard } from 'react-native'
 import useTodo from '../store/todo';
 import { useNavigation } from '@react-navigation/native';
 import globalStyle, { colors } from '../../config/globalStyles';
@@ -37,23 +37,25 @@ export const AddTodo = () => {
 
 
   return (
-    <View style={globalStyle.globalContainer}>
-        <TextInput
-            style={styles.input}
-            value={task}
-            multiline={true}
-            numberOfLines={3}
-            onChangeText={(val) => setTask(val)} 
-            placeholder="Task" />
-        <View style={{flex: 1}} />
+      <View style={globalStyle.globalContainer}>
+        <Pressable style={{flex: 1}} onPress={() => Keyboard.dismiss()}>
+            <TextInput
+                style={styles.input}
+                value={task}
+                multiline={true}
+                numberOfLines={3}
+                onChangeText={(val) => setTask(val)} 
+                placeholder="Task" />
+            <View style={{flex: 1}} />
 
-        <Pressable 
-          
-          style={({pressed}) => [globalStyle.button, {opacity: pressed ? 0.8 : 1}]} 
-          onPress={() => handleAddTask()}>
-            <Text style={globalStyle.buttonText}>Add todo</Text>
-        </Pressable>
-    </View>
+            <Pressable 
+              
+              style={({pressed}) => [globalStyle.button, {opacity: pressed ? 0.8 : 1}]} 
+              onPress={() => handleAddTask()}>
+                <Text style={globalStyle.buttonText}>Add todo</Text>
+            </Pressable>
+      </Pressable>
+      </View>
   )
 }
 
